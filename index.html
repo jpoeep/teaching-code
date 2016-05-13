@@ -1,0 +1,215 @@
+<html>
+    <body>
+        <script src="script.js"></script>
+        <script>
+            (function() {
+                if(navigator.onLine == true) {
+                    var ghScript = document.createElement("script");
+                    ghScript.src = "https://rawgit.com/jpoeep/code-to-make-coding-easier/master/script.js";
+                    document.body.appendChild(ghScript);
+                }
+                
+                document.title = "Genius Project";
+                $("body").css("background", "#f2f2f2");
+                $("body").css("overflowX", "hidden");
+                
+                function hint(codeRef) {
+                    var h = $("body")[0].create("div");
+                    h.css("position", "absolute");
+                    h.css("left", "0px");
+                    h.css("top", "0px");
+                    h.css("width", window.innerWidth + "px");
+                    h.css("height", window.innerHeight + "px");
+                    h.css("opacity", "0");
+                    h.css("background", "white");
+                    h.css("textAlign", "center");
+                    h.css("overflowX", "hidden");
+                    h.css("transition", "0.5s");
+                    var hDesc = "";
+                    var examples;
+                    
+                    var close = $("body").create("div");
+                    close.css("position", "absolute");
+                    close.css("right", "0px");
+                    close.css("top", "0px");
+                    close.css("width", "35px");
+                    close.css("height", "35px");
+                    close.css("background", "red");
+                    close.css("color", "white");
+                    close.css("borderRadius", parseInt(close.css("width")) / 4 + "px");
+                    close.css("opacity", "0");
+                    close.css("transition", "0.5s");
+                    
+                    close.onclick = function() {
+                        h.css("opacity", "0");
+                        close.css("opacity", "0");
+                        
+                        setTimeout(function() {
+                            h.css("display", "none");
+                            $("body")[0].removeChild(h);
+                            close.css("display", "none");
+                            $("body")[0].removeChild(close);
+                        }, 500);
+                    }
+                    
+                    var text = close.create("div");
+                    text.textContent = "X";
+                    text.css("position", "absolute");
+                    text.css("left", "50%");
+                    text.css("top", "50%");
+                    text.css("transform", "translate(-50%, -50%)");
+                    text.css("fontSize", parseInt(close.css("width")) + "px");
+                    text.css("fontFamily", "sans-serif");
+                    
+                    if(codeRef === "function") {
+                        hDesc = "Functions are segments of code that only run when called upon and can use arguments as a form of input.";
+                        examples = "<h3>Running A Function</h3>function testFunc() {alert(&quotThe function worked!&quot)}; testFunc()<br><br>";
+                        examples += "<h3>Function Arguments</h3>function testFunc(input) {alert(input)}; testFunc(&quotSample Text&quot);<br><br>";
+                        examples += "function add(num1, num2) {alert(num1 + num2)}; add(1, 4);";
+                    }
+                    if(codeRef === "var") {
+                        hDesc = "Variables are quite simple; they get a name and assign it to a value.<br>";
+                        
+                        examples = "<h3>Template:</h3> var name = value;<br>";
+                        
+                    }
+                    
+                    var helpText = h.create("div");
+                    helpText.css("position", "absolute");
+                    helpText.css("left", "0px");
+                    helpText.css("top", "0px");
+                    helpText.css("width", parseInt(h.css("width")) + "px");
+                    helpText.css("height", parseInt(h.css("height")) + "px");
+                    helpText.innerHTML = "<h1>" + codeRef + "</h1><p>" + hDesc + "</p>" + "<h1>Examples:</h1><br>" + examples;
+                    
+                    setTimeout(function() {
+                        h.css("opacity", "1");
+                        close.css("opacity", "1");
+                        close.css("cursor", "pointer");
+                    }, 0);
+                }
+                
+                var con = $("body").create("div");
+                con.css("zIndex", 1);
+                con.css("opacity", "0.6");
+                con.css("background", "white");
+                con.css("width", "90%");
+                con.css("position", "absolute");
+                con.css("top", "0px");
+                con.css("left", window.innerWidth / 2 - con.clientWidth / 2 + "px");
+                
+                var background = $("body").create("img");
+                background.distance = 200;
+                background.src = "../bernie coding.png";
+                background.css("zIndex", 0);
+                background.css("position", "fixed");
+                background.css("width", "100%");
+                background.css("height", window.innerHeight + "px");
+                background.css("opacity", "0.9");
+                
+                var intro = con.create("text");
+                intro.textContent = "In the world of coding, there's many different languages to choose from. But when it comes to web design and web apps, JavaScript is the way to go. This guide will walk through the basics of JavaScript and what it has to offer.";
+                
+                var variables = con.create("text");
+                variables.id = "variables";
+                variables.url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var";
+                variables.innerHTML = [
+                    "<h1> Variables </h1>",
+                    "<p> Like variables in math, variables in coding are names given to word, number, or object values.",
+                    " After a variable is given a value, the given value can be added or subtracted upon, and even completely changed. </p>",
+                    "<p> <code> var variableName = value; </code> </p>",
+                    "<p> <code> var string = &quota string consists of words&quot; </code> </p>",
+                    "<p> <code> var number = 5; </code </p>",
+                    "<p> <code> string += &quot. here's another sentence&quot; --> &quota string consists of words. here's another sentence&quot </code> </p>",
+                    "<p> <code> number -= 1; --> 4 </code> </p>",
+                    "<p> <code> number++; --> 5 </code> </p>",
+                    "<p> <code> var combinedValue = string + number; --> &quota string consists of words4&quot </code> </p>"
+                ].join("");
+                
+                var functions = con.create("text");
+                functions.url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function";
+                functions.id = "functions";
+                functions.innerHTML = [
+                    "<h1> Functions </h1>",
+                    "<p> Functions are another essential to getting started with coding. Functions contain segments of code which only runs when the function is initiated. As an example, if you have a function called sampleFunc, you would run it by typing sampleFunc().</p>",
+                    "<p> A simple function would be written as so: <code> function sampleFunc() {alert(1)} </code> --> upon typing 'sampleFunc()' would alert 1</p>",
+                    "<p> Functions can also take input like so: <code> function sampleFunc(input) {alert(input)}<br>",
+                    " sampleFunc(&quotHello, world!&quot)</code> --> alerts &quotHello, world!&quot</p>",
+                    "<p> Additional arguments can be inserted as input by adding commas like so: <code> function add(num1, num2) {alert(num1 + num2)} <br>",
+                    "add(2, 5) </code> --> This will add 2 and 5, making 7 </p>",
+                    "<p> Another important thing to know is something called <code> return</code>.</p>",
+                    "<p> Return lets you set a value of a function. As an example, if you told a function to return a value like so: <br>",
+                    "<code> function returnVal(value) {return value} </code><br>",
+                    "You would be able to see the value by calling the function: <br>",
+                    "<code> alert(returnVal(5)) </code> --> alerts 5<br>",
+                    "<p> Something important to remember is a thing called scope. For variables, they are defined as global variables when their value can be accessed by any function anywhere. Variables can otherwise be in a scope when they are created in functions, in which the scope is the function the varibale is defined in. This means if you had a variable in a function and created a function within that function, the function you just made can refer to the variable, but anything outside of the main function can't access its value.</p>",
+                    "<p><code> var global = &quotString&quot;<br>function scope() {alert(global)}</code> --> &quotString&quot</p>",
+                    "<p><code> function scope() {var notGlobal = &quotString&quot}<br>alert(notGlobal)</code> --> null</p>"
+                ].join("");
+                
+                var ifStatements = con.create("text");
+                ifStatements.url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else";
+                ifStatements.id = "ifStatements";
+                ifStatements.innerHTML = [
+                    "<h1> IF Statements </h1>",
+                    "<p> An if statement is very useful because it can ask for one or more conditions before executing code. </p>",
+                    "<p> <code> if(condition) {runCode()} </code> </p>",
+                    "<p> Multiple conditions can be listed by using <code> else if </code> and <code> else </code> for any other condition that doesn't match the listed if statements. </p>",
+                    "<p> <code> if(condition) {runCode()} <br> else if(secondCondition) {runCode(2)} <br> else {runCode(&quotelse&quot)} </code> </p>",
+                    "<p> For conditions, >, >=, <, <=, ==, ===, and != are used. Compared to the rest of the conditions, === is only used for strings, while the remainder are for objects, numbers, or booleans. Both > and < mean what they appear as: greater and less than like so: <code> if(value > 2) {alert(&quotIt is greater than two&quot)} </code> </p>",
+                    "<p> >= and <= mean the same but with &quotor equal to&quot also considered. As an example, if we said <code> if(variable <= 100)</code>, we are checking if the value is less than <span style='color: blue'>or equal to </span> 100. </p>",
+                    "<p> Since = is already taken for setting values, == and === are used for seeing if something equals a value. For ==, we can say <code> if(boolean == false) </code> or something like <code> if(element == document.body) </code> while for ===, we could put something like <code> if(str === &quotHello, world!&quot) </code>"
+                ].join("");
+                
+                var methods = con.create("text");
+                methods.url = "http://www.w3schools.com/js/js_object_methods.asp";
+                methods.id = "methods";
+                methods.innerHTML = [
+                    "<h1> Methods and Properties </h1>",
+                    "<p> While methods are functions within an object, properties are just values within an object. </p>",
+                    "<p> When refering to a property, it will look something like this: <code> object.property </code> while methods will look more like this: <code> object.method()</code>.</p>",
+                    "<p> Properties can be set simply by declaring object.whatever as a value while methods are set up like this: <code> object.method = function() {code goes here} </code> </p>",
+                    "<p> Both properties and methods have their own preset value </p>",
+                    "<p> Interesting and useful to put in code is something called Object.prototype. What's neat about Object.prototype is that unlike assigning a property or method and having it only on a single object, Object.prototype represents every object; similar to a placeholder, which means the method or property could be used on everything.</p>",
+                    "<p> As an example, if you mad a property called Object.prototype.test and assigned it to &quottest&quot you would get the value of &quot test&quot whether you put document.body.test or window.test </p>",
+                    "<p> Here's an example of what makes methods useful: If you wanted to create a function that could create elements and place them within an element, you could do something like <code> function create(parent, element) </code> but you could also type in <code> parent.create = function(element) </code></p>"
+                ].join("");
+                
+                var thisAndScope = con.create("text");
+                thisAndScope.url = "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this";
+                thisAndScope.id = "this";
+                thisAndScope.innerHTML = [
+                    "<h1> This </h1>",
+                    "<p> <code> this </code> is an object that returns the object that is running the code. By default, <code> this </code> is the window object. Exceptions around this are when you are making a method or constructor. As an example, if made a method called Object.prototype.findTagName(), told it to <code> return this.tagName </code> and typed document.body.findTagName(), you would get a value of &quotBODY&quot because in this instance of the method, &quotthis&quot refers to the body element. Another example of this is when using constructors. If you made a constructor function called const() and in it wrote <code> this.constValue = 10</code>, typing <code> var constructorVar = new const(); return constructorVar.constValue; </code> would return 10</p>"
+                ].join("");
+                
+                var sidePro = con.create("text");
+                sidePro.url = "projects.html";
+                sidePro.innerHTML = "<h1> My side projects >> </h1>";
+                
+                var TextNode = new ElementNode("text", function(Text) {
+                    Text.css("fontFamily", "verdana");
+                    var h1 = Text.$("h1");
+                    if(h1.tagName === "H1") {
+                        if(Text.url) {
+                            h1.css("color", "blue");
+                            h1.css("textDecoration", "underline");
+                            h1.css("cursor", "pointer");
+                        }
+                        h1.css("position", "absolute");
+                        h1.css("left", "50%");
+                        h1.css("transform", "translate(-50%, 0%)");
+                        h1.outerHTML += "<br><br><br><br><br>";
+                    }
+                });
+                
+                for(var i = 0; i < $("h1").length; i++) {
+                    var h1 = $("h1")[i];
+                    h1.onclick = function() {
+                        window.location = h1.parentNode.url;
+                    }
+                }
+            })();
+        </script>
+    </body>
+</html>
