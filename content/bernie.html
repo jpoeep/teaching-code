@@ -1,0 +1,65 @@
+<html>
+    <body>
+        <script src="https://rawgit.com/jpoeep/code-to-make-coding-easier/master/script.js"></script>
+        <script src="../script.js"></script>
+        <script>
+            (function() {
+                document.title = "Experimental";
+                
+                /*var img = new Image();
+                img.src = "../*/
+                
+                $("body").css("overflow", "hidden");
+                
+                var pics = ["http://www.gilmerfreepress.net/images/upload1/BernieSanders.png", "bernie.png", "http://www.caliteensforbernie.com/favicon.ico"];
+                
+                var colorChange = new loop(function() {
+                    $("body").css("background", "rgb(" + [rand(300), rand(300), rand(300)] + ")");
+                }, 125);
+                
+                loop(function() {
+                    var img = $("body").create("img");
+                    img.src = pics[Math.floor(Math.random() * pics.length)];
+                    img.css("position", "absolute");
+                    img.css("left", 0 - img.width + "px");
+                    img.css("bottom", 0 - img.height + "px");
+                    var throwStrength = Math.floor(Math.random() * 10) + 30;
+                    var moveStrength = Math.floor(Math.random() * 10) + 10;
+                    var rotation = Math.floor(Math.random() * 11);
+                    var deg = 0;
+
+                    var movement = loop(function() {
+                        deg += rotation;
+                        img.css("transform", "rotate(" + deg + "deg)");
+                        img.css("left", parseInt(img.left) + moveStrength + "px");
+                        img.css("bottom", parseInt(img.bottom) + throwStrength + "px");
+                        throwStrength--;
+                        if(parseInt(img.bottom) + img.clientHeight <= 0) {
+                            img.delete();
+                        }
+                    }, 15);
+                }, colorChange.delay * 2);
+                
+                /*var background = $("body").create("img");
+                background.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_Soviet_Union.svg/2000px-Flag_of_the_Soviet_Union.svg.png";
+                background.css("zIndex", 0);
+                background.css("position", "absolute");
+                background.css("width, height", "100%");
+                background.css("left", "0px");
+                background.css("bottom", 0 - background.height + "px");
+                
+                var music = $("body").create("audio");
+                music.src = "https://www.marxists.org/history/ussr/sounds/mp3/soviet-anthem.mp3";
+                music.volume = 0;
+                music.play();
+                
+                loop(function() {
+                    if(parseInt(background.bottom) < 0) {
+                        background.css("bottom", parseInt(background.bottom) + 1 + "px");
+                        music.volume = 1 - parseInt(background.bottom) / -632;
+                    }
+                }, 75);*/
+            })();
+        </script>
+    </body>
+</html>
