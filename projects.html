@@ -1,0 +1,55 @@
+<html>
+    <body>
+        <script src="script.js"></script>
+        <script>
+            (function() {
+                function Project() {
+                    var that = this;
+                    var con = $("body").create("div");
+                    con.className = "project";
+                    con.css("position", "absolute");
+                    con.css("width", "600px");
+                    con.css("height", "400px");
+                    con.css("border", "1px solid black");
+                    con.css("left", window.innerWidth / 2 - con.clientWidth / 2 + "px");
+                    con.css("top", 200 + (con.width * ($(".project").length - 1)) + "px");
+                    con.css("transition", "box-shadow 0.5s");
+                    con.css(":hover", "box-shadow: 0px 0px 100px 0px");
+                    var thumbNail = con.create("img");
+                    thumbNail.css("position", "absolute");
+                    thumbNail.css("left, top", "0px");
+                    thumbNail.css("width, height", "100%");
+                    var title = con.create("h1");
+                    title.css("position", "absolute");
+                    title.css("width", "100px");
+                    title.css("left", con.clientWidth / 2 - title.clientWidth / 2 + "px");
+                    
+                    loop(function() {
+                        if(that.thumbNail) {
+                            thumbNail.src = that.thumbNail;
+                        }
+                        if(that.title) {
+                            title.textContent = that.title;
+                            con.title = that.title;
+                        }
+                        if(that.titleColor) {
+                            title.css("color", that.titleColor);
+                        }
+                        if(that.url) {
+                            con.css("cursor", "pointer");
+                            
+                            con.onclick = function() {
+                                window.location = that.url;
+                            }
+                        }
+                    });
+                }
+                
+                var bernie = new Project();
+                bernie.title = "Bounding Bernies";
+                bernie.thumbNail = "content/feel the bern.png";
+                bernie.url = "content/bernie.html";
+            })();
+        </script>
+    </body>
+</html>
