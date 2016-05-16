@@ -204,10 +204,10 @@
                 });
                 
                 for(var i = 0; i < $("h1").length; i++) {
-                    var h1 = $("h1")[i];
-                    h1.onclick = function() {
-                        window.location = h1.parentNode.url;
-                    }
+                    /*$("h1")[i].onclick = function() {
+                        window.location = $("h1")[i].parentNode.url;
+                    } for some reason this first method doesn't work */
+                    eval("$('h1')[" + i + "].onclick = function() {window.location = '" + $("h1")[i].parentNode.url + "'}");
                 }
             })();
         </script>
