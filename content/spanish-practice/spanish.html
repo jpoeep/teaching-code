@@ -1,0 +1,92 @@
+<html>
+    <body>
+        <script src="../../script.js"></script>
+        <script>
+            (function() {
+                document.title = "Experimental";
+                
+                (function init() {
+                    var initHolder = $("body").create("div");
+                    initHolder.css("width, height", "100%");
+                    initHolder.css("position", "absolute");
+                    initHolder.css("left, top", "0px");
+                    
+                    var questions = ["¿Donde naciste?", "¿Que tipo de trabajo has hecho en tu vida?", "¿Como era tu vida antes de ser famoso/a?", "¿Que has hecho para mejorar el mundo?", "¿Que has logrado en tu vida?", "¿Que ha sido tu mayor logro?", "¿Que te ha gustado mas de tu profesion?", "¿Adonde has viajado en tu vida?", "¿Que te ha inspirado mas en tu vida?", "¿Que mensaje tienes para el publico?"];
+                    
+                    var answers = ["He vivido en Puerto Rico", "He trabajado como medico", "Antes de que estaba enfermo tenia una afeccion cronica del colon", "Han ayudado en la salud publica y crear conciencia sobre el SIDA", "Han contribuido a la investigacion del SIDA y fue nombrado como Cirujano General", "Era la primera mujer, el primer puertorriqueno y el primer hispano en ocupar el cargo de Cirujano General de los Estados Unidos", "Me ha gustado ayudar a los necesitados", "He viajado a muchos paises pobres para dar asistencia medica", "Me inspire en las experiencias de mi infancia cuando mi colon estaba en una condicion de salud", "Yo diria que si hay algo que quieres hacer, no tengas miedo a cabo"];
+                    
+                    var randQues = [];
+                    
+                    (function getRandomQuestions() {
+                        if(randQues.length <= 4) {
+                            var randNum = rand(questions.length - 1);
+
+                            if(randQues.indexOf(questions[randNum]) > -1) {
+                                return getRandomQuestions();
+                            }
+                            else if(randQues.indexOf(questions[randNum]) == -1) {
+                                randQues.push(questions[randNum].substring(1, questions[randNum].length));
+                                getRandomQuestions();
+                            }
+                        }
+                    })();
+                    
+                    function quiz(mode) {
+                        var quesNum;
+                        
+                        var quesCon = $("body").create("div");
+                        quesCon.css("position", "absolute");
+                        quesCon.css("fontSize", "30px");
+                        quesCon.css("display", "none");
+                        
+                        loop(function() {
+                            quesCon.css("width, height", "auto");
+                            quesCon.centerTo();
+                            
+                            if(quesCon.textContent) {
+                                quesCon.css("display", "block");
+                            }
+                        });
+                        
+                        if(mode === "simple") {
+                            quesNum = 0;
+                            
+                            (function ask() {
+                                if(quesNum <= questions.length - 1) {
+                                    quesCon.textContent = questions[quesNum].substring(1, questions[quesNum].length);
+                                    
+                                    document.onclick = function() {
+                                        quesCon.textContent = answers[quesNum];
+                                        
+                                        document.onclick = function() {
+                                            ask();
+                                        }
+                                    }
+                                    
+                                    quesNum++;
+                                }
+                            })();
+                        }
+                        else if(mode === "random" || mode == null) {
+                            (function roll() {
+                                var randNum = rand(questions.length - 1);
+                                
+                                quesCon.textContent = questions[randNum].substring(1, questions[randNum].length);
+                                
+                                document.onclick = function() {
+                                    quesCon.textContent = answers[randNum];
+                                    
+                                    document.onclick = function() {
+                                        return roll();
+                                    }
+                                }
+                            })();
+                        }
+                    }
+                    
+                    quiz("random");
+                })();
+            })();
+        </script>
+    </body>
+</html>
