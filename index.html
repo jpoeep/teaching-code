@@ -203,6 +203,16 @@
                     }
                 });
                 
+                var block = $("body").create("div");
+                block.css("height", $("body").scrollHeight + "px");
+                block.css("width", con.offsetLeft + "px");
+                block.css("position", "absolute");
+                block.css("left, top", "0px");
+                block.css("background", "grey");
+                
+                var b2 = $("body").clone(block);
+                b2.css("left", con.offsetLeft + con.clientWidth + "px");
+                
                 for(var i = 0; i < $("h1").length; i++) {
                     /*$("h1")[i].onclick = function() {
                         window.location = $("h1")[i].parentNode.url;
